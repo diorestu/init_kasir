@@ -16,19 +16,25 @@
 @endsection
 
 @section('content')
-    <h4 class="fw-bold py-3 mb-4">
-        <span class="text-muted fw-light">Master /</span> Barang
-    </h4>
-    <div class="card">
+    <div class="d-flex justify-content-between align-items-baseline">
+        <h4 class="fw-bold mb-3">
+            <span class="text-muted fw-light">Master /</span> Barang
+        </h4>
+        <div class="form-group ms-2">
+            <div class="search-box position-relative">
+                <input type="text" class="form-control" id="search" name="cari" placeholder="Cari disini...">
+                <i class="fa fa-search search-icon"></i>
+            </div>
+        </div>
+    </div>
+    <div class="card rounded-0">
         <div class="card-datatable table-responsive pt-0">
             <table class="datatable table">
-                <thead>
+                <thead class="table-light">
                     <tr>
-                        <th></th>
-                        <th></th>
                         <th>id</th>
                         <th>Name</th>
-                        <th>Email</th>`
+                        <th>Email</th>
                         <th>Date</th>
                         <th>Salary</th>
                         <th>Status</th>
@@ -43,8 +49,33 @@
 @section('page-script')
     <script type="text/javascript">
         $(function() {
-            $('.datatable').DataTable({
+            var table = $('.datatable').DataTable({
+                lengthMenu: [5, 10, 15, 25, 50],
+                "dom": '<"my-0"t><"d-flex justify-content-between align-items-center mx-3 mb-2"<"d-flex justify-content-start" li>p>',
+                "language": {
+                    "sSearch": "Cari:",
+                    "emptyTable": "Data Tidak Tersedia",
+                    "paginate": {
+                        "previous": '<i class="fa fa-sm fa-chevron-left"></i>',
+                        "next": '<i class="fa fa-sm fa-chevron-right"></i>'
+                    },
+                    "decimal": ",",
+                    "emptyTable": "Tidak Ada Data Tersedia",
+                    "info": "Menampilkan _START_ s/d _END_ dari _TOTAL_ data",
+                    "infoEmpty": "Menampilkan 0 s/d 0 dari 0 data",
+                    "infoFiltered": "(difiliter dari _MAX_ data)",
+                    "infoPostFix": "",
+                    "thousands": ".",
+                    "lengthMenu": "Tampilkan _MENU_ data",
+                    "loadingRecords": "Memuat...",
+                    "processing": "",
+                    "search": "Cari:",
+                    "zeroRecords": "Tidak ada data yang sesuai",
+                },
+            });
 
+            $('#search').keyup(function() {
+                table.search($(this).val()).draw();
             });
         });
     </script>

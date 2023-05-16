@@ -13,7 +13,7 @@
 <!-- Core CSS -->
 <link rel="stylesheet" href="{{ asset('assets/vendor/css/core.css') }}" />
 <link rel="stylesheet"
-    href="{{ asset('assets/vendor/css' . $configData['rtlSupport'] . '/' . $configData['theme'] . ($configData['style'] !== 'light' ? '-' . $configData['style'] : '') . '.css') }}" />
+    href="{{ asset('assets/vendor/css/' . $configData['theme'] . ($configData['style'] !== 'light' ? '-' . $configData['style'] : '') . '.css') }}" />
 {{-- <link rel="stylesheet" href="{{ asset('assets/css/demo.css') }}" /> --}}
 
 
