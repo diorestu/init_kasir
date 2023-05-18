@@ -82,14 +82,14 @@
                 <li>
                     <a class="dropdown-item"
                         href="{{ Route::has('profile.show') ? route('profile.show') : 'javascript:void(0);' }}">
-                        <i class="fa fa-user-check me-2 fa-sm"></i>
+                        <i class="ti ti-user-check me-2 ti-sm"></i>
                         <span class="align-middle">Profil Saya</span>
                     </a>
                 </li>
                 <li>
                     <a class="dropdown-item"
                         href="{{ Route::has('profile.show') ? route('profile.show') : 'javascript:void(0);' }}">
-                        <i class="fa fa-cog me-2 fa-sm"></i>
+                        <i class="ti ti-settings me-2 ti-sm"></i>
                         <span class="align-middle">Pengaturan</span>
                     </a>
                 </li>
