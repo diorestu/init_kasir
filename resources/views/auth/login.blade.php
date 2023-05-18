@@ -95,7 +95,7 @@
                                 </div>
                             </div>
                             <div class="mb-2 mt-3">
-                                <button class="btn btn-primary d-grid w-100" type="submit">Sign in</button>
+                                <button class="btn btn-dark d-grid w-100" type="submit">Sign In</button>
                             </div>
                         </form>
                     </div>

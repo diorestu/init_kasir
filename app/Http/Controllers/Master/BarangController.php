@@ -16,7 +16,7 @@ class BarangController extends Controller
          return DataTables::of($data)
             ->addIndexColumn()
             ->addColumn('action', function ($row) {
-               return '<a href="' . route('barang.edit', $row->id) . '" class=""><i class="bx bx-dots-vertical-rounded text-reset bx-md"></i></a>';
+               return '<a href="' . route('master.barang.edit', $row->id) . '" class=""><i class="bx bx-dots-vertical-rounded text-reset bx-md"></i></a>';
             })
             ->rawColumns(['action'])
             ->make(true);

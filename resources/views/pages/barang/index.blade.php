@@ -34,10 +34,6 @@
                     <tr>
                         <th>id</th>
                         <th>Name</th>
-                        <th>Email</th>
-                        <th>Date</th>
-                        <th>Salary</th>
-                        <th>Status</th>
                         <th>Action</th>
                     </tr>
                 </thead>
@@ -50,8 +46,9 @@
     <script type="text/javascript">
         $(function() {
             var table = $('.datatable').DataTable({
+                ajax: "{{ route('master.barang.index') }}",
                 lengthMenu: [5, 10, 15, 25, 50],
-                "dom": '<"my-0"t><"d-flex justify-content-between align-items-center mx-3 mb-2"<"d-flex justify-content-start" li>p>',
+                "dom": '<"my-0"t><"d-flex justify-content-between align-items-center mx-3"<"d-flex justify-content-start" li>p>',
                 "language": {
                     "sSearch": "Cari:",
                     "emptyTable": "Data Tidak Tersedia",
@@ -61,8 +58,8 @@
                     },
                     "decimal": ",",
                     "emptyTable": "Tidak Ada Data Tersedia",
-                    "info": "Menampilkan _START_ s/d _END_ dari _TOTAL_ data",
-                    "infoEmpty": "Menampilkan 0 s/d 0 dari 0 data",
+                    "info": "|&nbsp;&nbsp;&nbsp;&nbsp;Menampilkan _START_ s/d _END_ dari _TOTAL_ data",
+                    "infoEmpty": "|&nbsp;&nbsp;&nbsp;&nbsp;Menampilkan 0 s/d 0 dari 0 data",
                     "infoFiltered": "(difiliter dari _MAX_ data)",
                     "infoPostFix": "",
                     "thousands": ".",
@@ -72,6 +69,16 @@
                     "search": "Cari:",
                     "zeroRecords": "Tidak ada data yang sesuai",
                 },
+                columns: [{
+                        data: 'id'
+                    },
+                    {
+                        data: 'nama'
+                    },
+                    {
+                        data: 'deskripsi'
+                    },
+                ]
             });
 
             $('#search').keyup(function() {
