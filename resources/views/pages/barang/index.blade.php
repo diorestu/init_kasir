@@ -6,77 +6,89 @@
 
 @section('title', 'Home')
 
-@section('vendor-style')
-    <link rel="stylesheet" href="{{ asset('assets/vendor/libs/datatables-bs5/datatables.bootstrap5.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/vendor/libs/datatables-responsive-bs5/responsive.bootstrap5.css') }}">
-@endsection
-
-@section('vendor-script')
-    <script src="{{ asset('assets/vendor/libs/datatables-bs5/datatables-bootstrap5.js') }}"></script>
-@endsection
 
 @section('content')
-    <div class="d-flex justify-content-between align-items-baseline">
-        <h4 class="fw-bold mb-3">
-            <span class="text-muted fw-light">Master /</span> Barang
-        </h4>
-        <div class="form-group ms-2">
-            <div class="search-box position-relative">
-                <input type="text" class="form-control" id="search" name="cari" placeholder="Cari disini...">
-                <i class="fa fa-search search-icon"></i>
+    <x-breadcrumb title='Barang' parent1='Master' />
+    <div class="d-flex justify-content-end justify-content-md-between align-items-end">
+        <x-page-header title='Barang' parent1='Master' />
+        <div class="d-flex justify-content-end mb-3">
+            <!-- End Offcanvas -->
+            <button class="btn btn-dark btn-sm" type="button" data-bs-toggle="offcanvas" data-bs-target="#addBarangPage"
+                aria-controls="addBarangPage"><i class="ti ti-playlist-add"></i>&nbsp;Tambah Data</button>
+            <x-add-barang-page />
+            <div class="form-group ms-2">
+                <div class="search-box position-relative">
+                    <input type="text" class="form-control" id="search" name="cari" placeholder="Cari disini...">
+                    <i class="fa fa-search search-icon"></i>
+                </div>
             </div>
         </div>
     </div>
-    <div class="card rounded-0">
-        <div class="card-datatable table-responsive pt-0">
-            <table class="datatable table">
-                <thead class="table-light">
-                    <tr>
-                        <th>id</th>
-                        <th>Name</th>
-                        <th>Email</th>
-                        <th>Date</th>
-                        <th>Salary</th>
-                        <th>Status</th>
-                        <th>Action</th>
-                    </tr>
-                </thead>
-            </table>
-        </div>
-    </div>
+    <x-table :head="['no', 'nama produk', 'merk', 'kategori', '']"></x-table>
 @endsection
 
-@section('page-script')
-    <script type="text/javascript">
+@push('addon-script')
+    <script>
         $(function() {
-            var table = $('.datatable').DataTable({
-                lengthMenu: [5, 10, 15, 25, 50],
-                "dom": '<"my-0"t><"d-flex justify-content-between align-items-center mx-3 mb-2"<"d-flex justify-content-start" li>p>',
-                "language": {
-                    "sSearch": "Cari:",
-                    "emptyTable": "Data Tidak Tersedia",
-                    "paginate": {
-                        "previous": '<i class="fa fa-sm fa-chevron-left"></i>',
-                        "next": '<i class="fa fa-sm fa-chevron-right"></i>'
-                    },
-                    "decimal": ",",
-                    "emptyTable": "Tidak Ada Data Tersedia",
-                    "info": "Menampilkan _START_ s/d _END_ dari _TOTAL_ data",
-                    "infoEmpty": "Menampilkan 0 s/d 0 dari 0 data",
-                    "infoFiltered": "(difiliter dari _MAX_ data)",
-                    "infoPostFix": "",
-                    "thousands": ".",
-                    "lengthMenu": "Tampilkan _MENU_ data",
-                    "loadingRecords": "Memuat...",
-                    "processing": "",
-                    "search": "Cari:",
-                    "zeroRecords": "Tidak ada data yang sesuai",
+            options.order = [
+                [1, 'asc']
+            ]
+            options.ajax = "{{ route('master.barang.index') }}";
+            options.columns = [{
+                    data: 'DT_RowIndex',
+                    width: '5%',
+                    searchable: false,
+                    orderable: false,
+                    class: 'text-center'
                 },
-            });
+                {
+                    data: 'nama'
+                },
+                {
+                    data: 'merk.merek'
+                },
+                {
+                    data: 'kategori.kategori'
+                },
+                {
+                    data: 'action',
+                    width: '5%',
+                    orderable: false,
+                    searchable: false,
+                    class: 'text-center'
+                }
+            ];
+            var table = $('.datatable').DataTable(options);
 
             $('#search').keyup(function() {
                 table.search($(this).val()).draw();
             });
         });
     </script>
-@endsection
+    @if (Session::has('success'))
+        <script type="text/javascript">
+            Swal.fire({
+                position: 'top-end',
+                showConfirmButton: false,
+                toast: true,
+                //  title: 'Berhasil',
+                text: "{{ \Session::get('success') }}",
+                icon: 'success',
+                timer: 1000
+            });
+        </script>
+    @endif
+    @if (Session::has('error'))
+        <script type="text/javascript">
+            Swal.fire({
+                position: 'top-end',
+                showConfirmButton: false,
+                toast: true,
+                //  title: 'Gagal',
+                text: "{{ \Session::get('error') }}",
+                icon: 'error',
+                timer: 1000
+            });
+        </script>
+    @endif
+@endpush
