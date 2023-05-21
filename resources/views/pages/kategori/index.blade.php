@@ -4,17 +4,17 @@
 
 @extends('layouts/layoutMaster')
 
-@section('title', 'Home')
+@section('title', 'Kategori')
 
 
 @section('content')
-    <x-breadcrumb title='Barang' parent1='Master' />
+    <x-breadcrumb title='Kategori' parent1='Master' />
     <div class="d-flex justify-content-end justify-content-md-between align-items-end">
-        <x-page-header title='Barang' parent1='Master' />
+        <x-page-header title='Kategori' parent1='Master' />
         <div class="d-flex justify-content-end mb-3">
             <!-- End Offcanvas -->
-            <button class="btn btn-dark btn-sm" type="button" data-bs-toggle="offcanvas" data-bs-target="#addBarangPage"
-                aria-controls="addBarangPage"><i class="ti ti-playlist-add"></i>&nbsp;Tambah Data</button>
+            <button class="btn btn-dark btn-sm" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasEnd"
+                aria-controls="offcanvasEnd"><i class="ti ti-playlist-add"></i>&nbsp;Tambah Data</button>
             <x-add-barang-page />
             <div class="form-group ms-2">
                 <div class="search-box position-relative">
@@ -24,7 +24,7 @@
             </div>
         </div>
     </div>
-    <x-table :head="['no', 'nama produk', 'merk', 'kategori', '']"></x-table>
+    <x-table :head="['no', 'nama kategori', '']"></x-table>
 @endsection
 
 @push('addon-script')
@@ -33,7 +33,7 @@
             options.order = [
                 [1, 'asc']
             ]
-            options.ajax = "{{ route('master.barang.index') }}";
+            options.ajax = "{{ route('master.kategori.index') }}";
             options.columns = [{
                     data: 'DT_RowIndex',
                     width: '5%',
@@ -42,13 +42,7 @@
                     class: 'text-center'
                 },
                 {
-                    data: 'nama'
-                },
-                {
-                    data: 'merk.merek'
-                },
-                {
-                    data: 'kategori.kategori'
+                    data: 'kategori'
                 },
                 {
                     data: 'action',
@@ -65,30 +59,4 @@
             });
         });
     </script>
-    @if (Session::has('success'))
-        <script type="text/javascript">
-            Swal.fire({
-                position: 'top-end',
-                showConfirmButton: false,
-                toast: true,
-                //  title: 'Berhasil',
-                text: "{{ \Session::get('success') }}",
-                icon: 'success',
-                timer: 1000
-            });
-        </script>
-    @endif
-    @if (Session::has('error'))
-        <script type="text/javascript">
-            Swal.fire({
-                position: 'top-end',
-                showConfirmButton: false,
-                toast: true,
-                //  title: 'Gagal',
-                text: "{{ \Session::get('error') }}",
-                icon: 'error',
-                timer: 1000
-            });
-        </script>
-    @endif
 @endpush

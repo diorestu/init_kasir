@@ -15,9 +15,9 @@
 
 <!--  Brand demo (display only for navbar-full and hide on below xl) -->
 @if (isset($navbarFull))
-    <div class="navbar-brand app-brand demo d-none d-xl-flex py-0 me-4">
+    <div class="navbar-brand app-brand demo d-none d-xl-flex py-3 me-4">
         <a href="{{ url('/') }}" class="app-brand-link gap-2">
-            <img src="{{ asset('assets/img/logo.svg') }}" width="50" alt="">
+            <img src="{{ asset('assets/img/logo.svg') }}" width="35" alt="">
         </a>
     </div>
 @endif

@@ -8,14 +8,52 @@
     },
     {
       "name": "Master",
-      "icon": "menu-icon tf-icons ti ti-layout-sidebar",
+      "icon": "menu-icon tf-icons ti ti-category-2",
       "slug": "master",
       "submenu": [
         {
+          "url": "/master/kategori",
+          "name": "Kategori",
+          "icon": "menu-icon tf-icons ti ti-category",
+          "slug": "master.kategori.index"
+        },
+        {
+          "url": "/master/merk",
+          "name": "Merk",
+          "icon": "menu-icon tf-icons ti ti-brand-appgallery",
+          "slug": "master.merk.index"
+        },
+        {
           "url": "/master/barang",
           "name": "Barang",
-          "icon": "menu-icon tf-icons ti ti-menu-2",
+          "icon": "menu-icon tf-icons ti ti-box",
           "slug": "master.barang.index"
+        }
+      ]
+    },
+    {
+      "name": "Kelola",
+      "icon": "menu-icon tf-icons ti ti-server",
+      "slug": "kelola",
+      "submenu": [
+        {
+          "url": "/kelola/stok",
+          "name": "Stok",
+          "icon": "menu-icon tf-icons ti ti-category",
+          "slug": "kelola.stok.index"
+        }
+      ]
+    },
+    {
+      "name": "Transaksi",
+      "icon": "menu-icon tf-icons ti ti-server",
+      "slug": "transaksi",
+      "submenu": [
+        {
+          "url": "/transaksi/penjualan",
+          "name": "Penjualan",
+          "icon": "menu-icon tf-icons ti ti-category",
+          "slug": "transaksi.penjualan.index"
         }
       ]
     }

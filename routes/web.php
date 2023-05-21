@@ -1,9 +1,12 @@
 <?php
 
-use App\Http\Controllers\Auth\LoginController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DashboardPage;
+use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Kelola\StokController;
+use App\Http\Controllers\Master\MerkController;
 use App\Http\Controllers\Master\BarangController;
+use App\Http\Controllers\Master\KategoriController;
 
 /*
 |--------------------------------------------------------------------------
@@ -31,5 +34,11 @@ Route::get('/', [DashboardPage::class, 'index'])->name('dashboard')->middleware(
 Route::prefix('master')->name('master.')->middleware('auth')->group(function () {
 
    // Master Pages Route
+   Route::resource('kategori', KategoriController::class);
+   Route::resource('merk', MerkController::class);
    Route::resource('barang', BarangController::class);
+});
+
+Route::prefix('kelola')->name('kelola.')->middleware('auth')->group(function () {
+   Route::resource('stok', StokController::class);
 });

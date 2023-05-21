@@ -20,6 +20,8 @@
 <link rel="stylesheet" href="{{ asset('assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css') }}" />
 <link rel="stylesheet" href="{{ asset('assets/vendor/libs/node-waves/node-waves.css') }}" />
 <link rel="stylesheet" href="{{ asset('assets/vendor/libs/typeahead-js/typeahead.css') }}" />
+<link rel="stylesheet" href="{{ asset('assets/vendor/libs/animate-css/animate.css') }}" />
+<link rel="stylesheet" href="{{ asset('assets/vendor/libs/sweetalert2/sweetalert2.css') }}" />
 
 <!-- Vendor Styles -->
 @yield('vendor-style')
@@ -27,3 +29,4 @@
 
 <!-- Page Styles -->
 @yield('page-style')
+@stack('addon-style')

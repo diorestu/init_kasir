@@ -1,8 +1,8 @@
-<div class="d-none d-md-block">
+<div class="d-flex d-md-none mb-2 justify-content-end">
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb breadcrumb-style1 mb-0 py-0">
             <li class="breadcrumb-item">
-                <a href="{{ $parent_url ?? route('dashboard') }}">{{ $parent1 ?? 'Beranda' }}</a>
+                <a href="#">{{ $parent1 ?? 'Beranda' }}</a>
             </li>
             @isset($parent2)
                 <li class="breadcrumb-item">
@@ -12,7 +12,4 @@
             <li class="breadcrumb-item active">{{ $title }}</li>
         </ol>
     </nav>
-    <h4 class="fw-bold">
-        {{ $title }}
-    </h4>
 </div>

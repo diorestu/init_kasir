@@ -167,6 +167,7 @@ return [
       /*
          * Package Service Providers...
          */
+      Alfa6661\AutoNumber\AutoNumberServiceProvider::class,
 
       /*
          * Application Service Providers...
