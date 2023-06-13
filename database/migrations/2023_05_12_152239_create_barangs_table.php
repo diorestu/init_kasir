@@ -18,6 +18,7 @@ return new class extends Migration
          $table->integer('user_id')->unsigned();
          $table->string('kategori', 100)->nullable();
          $table->string('keterangan', 160);
+         $table->softDeletes();
          $table->timestamps();
       });
 
@@ -26,6 +27,7 @@ return new class extends Migration
          $table->integer('user_id')->unsigned();
          $table->integer('supplier_id')->unsigned()->nullable();
          $table->string('merek', 100)->nullable();
+         $table->softDeletes();
          $table->timestamps();
       });
 
@@ -34,6 +36,7 @@ return new class extends Migration
          $table->integer('user_id')->unsigned();
          $table->string('satuan', 100)->nullable();
          $table->string('deskripsi', 160)->nullable();
+         $table->softDeletes();
          $table->timestamps();
       });
 
@@ -44,6 +47,7 @@ return new class extends Migration
          $table->integer('merek_id')->unsigned();
          $table->string('nama', 100);
          $table->string('deskripsi', 160)->nullable();
+         $table->softDeletes();
          $table->timestamps();
       });
    }

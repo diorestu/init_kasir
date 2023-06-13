@@ -7,6 +7,7 @@ use App\Http\Controllers\Kelola\StokController;
 use App\Http\Controllers\Master\MerkController;
 use App\Http\Controllers\Master\BarangController;
 use App\Http\Controllers\Master\KategoriController;
+use App\Http\Controllers\Transaksi\PenjualanController;
 
 /*
 |--------------------------------------------------------------------------
@@ -41,4 +42,8 @@ Route::prefix('master')->name('master.')->middleware('auth')->group(function () 
 
 Route::prefix('kelola')->name('kelola.')->middleware('auth')->group(function () {
    Route::resource('stok', StokController::class);
+});
+
+Route::prefix('transaksi')->name('transaksi.')->middleware('auth')->group(function () {
+   Route::resource('penjualan', PenjualanController::class);
 });

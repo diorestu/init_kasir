@@ -5,7 +5,9 @@ namespace App\Http\Controllers\Master;
 use DataTables;
 use App\Models\Merk;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Validator;
 
 
 class MerkController extends Controller
@@ -17,7 +19,14 @@ class MerkController extends Controller
          return DataTables::of($data)
             ->addIndexColumn()
             ->addColumn('action', function ($row) {
-               return '<a href="' . route('master.merk.edit', $row->id) . '" class=""><i class="ti ti-edit-circle text-secondary fw-normal"></i></a>';
+               return '<form action="' . route('master.merk.destroy', $row->id) . '" class="d-flex justify-content-center align-items-center" method="post">
+               ' . csrf_field() . '
+               ' . method_field("DELETE") . '
+                  <a href="' . route('master.merk.edit', $row->id) . '" class="btn btn-xs px-1">
+                     <i class="ti ti-edit-circle text-secondary fw-normal"></i>
+                  </a>
+                  <button type="submit" class="btn btn-xs px-1"><i class="ti ti-trash-x text-danger fw-normal"></i></button>
+               </form>';
             })
             ->rawColumns(['action'])
             ->make(true);
@@ -35,59 +44,76 @@ class MerkController extends Controller
       //
    }
 
-   /**
-    * Store a newly created resource in storage.
-    *
-    * @param  \Illuminate\Http\Request  $request
-    * @return \Illuminate\Http\Response
-    */
    public function store(Request $request)
    {
-      //
+      try {
+         DB::beginTransaction();
+         $validator = Validator::make($request->all(), [
+            'kategori'   => 'required|max:120',
+            'keterangan' => 'max:250',
+         ]);
+
+         if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator->errors())->withInput($request->all());
+         }
+
+         $input = $validator->validated();
+         $input['user_id'] = Auth::user()->id;
+         Merk::create($input);
+         DB::commit();
+         return redirect()->route('master.merk.index')->with('success', 'Berhasil Tambah Kategori!');
+      } catch (\Throwable $th) {
+         DB::rollback();
+         Log::debug(Auth::user()->name . ' at KategoriController store() ' . $th->getMessage());
+         return redirect()->route('master.merk.index')->with('error', 'Gagal: ' . $th->getMessage());
+      }
    }
 
-   /**
-    * Display the specified resource.
-    *
-    * @param  int  $id
-    * @return \Illuminate\Http\Response
-    */
    public function show($id)
    {
       //
    }
 
-   /**
-    * Show the form for editing the specified resource.
-    *
-    * @param  int  $id
-    * @return \Illuminate\Http\Response
-    */
    public function edit($id)
    {
-      //
+      $data = Merk::findOrFail($id);
+      return view('pages.merk.edit', compact('data'));
    }
 
-   /**
-    * Update the specified resource in storage.
-    *
-    * @param  \Illuminate\Http\Request  $request
-    * @param  int  $id
-    * @return \Illuminate\Http\Response
-    */
    public function update(Request $request, $id)
    {
-      //
+      try {
+         DB::beginTransaction();
+         $validator = Validator::make($request->all(), [
+            'kategori'   => 'required|max:120',
+            'keterangan' => 'max:250',
+         ]);
+
+         if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator->errors())->withInput($request->all());
+         }
+         $data = $validator->validated();
+         Merk::find($id)->update($data);
+         DB::commit();
+         return redirect()->route('master.merk.index')->with('success', 'Data Berhasil Diedit');
+      } catch (Throwable $e) {
+         DB::rollback();
+         Log::debug(Auth::user()->name . ' at KategoriController update() ' . $e->getMessage());
+         return redirect()->route('master.merk.index')->with('error', $e->getMessage());
+      }
    }
 
-   /**
-    * Remove the specified resource from storage.
-    *
-    * @param  int  $id
-    * @return \Illuminate\Http\Response
-    */
    public function destroy($id)
    {
-      //
+      try {
+         DB::beginTransaction();
+         Barang::findOrFail($id)->delete();
+         DB::commit();
+         return redirect()->route('master.merk.index')->with('success', 'Berhasil Hapus Kategori!');
+      } catch (\Throwable $e) {
+         DB::rollback();
+         Log::debug('KategoriController destroy() ' . $e->getMessage());
+         return redirect()->route('master.merk.index')->with('error', 'Gagal: ' . $e->getMessage());
+      }
    }
 }

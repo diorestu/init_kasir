@@ -7,7 +7,7 @@
     <script src="{{ asset('assets/vendor/libs/datatables-bs5/datatables-bootstrap5.js') }}"></script>
 @endsection
 
-<div class="card rounded-0 shadow-sm border mb-3">
+<div class="card rounded-0 shadow-sm border mb-1">
     <div class="card-datatable table-responsive pt-0">
         <table class="table table-hover table-sm table-striped-columns datatable" width="100%">
             <thead class="table-light">

@@ -23,10 +23,10 @@ class BarangController extends Controller
                return '<form action="' . route('master.barang.destroy', $row->id) . '" class="d-flex justify-content-center align-items-center" method="post">
                ' . csrf_field() . '
                ' . method_field("DELETE") . '
-                  <a href="' . route('master.barang.edit', $row->id) . '" class="btn btn-xs">
+                  <a href="' . route('master.barang.edit', $row->id) . '" class="btn btn-xs px-1">
                      <i class="ti ti-edit-circle text-secondary fw-normal"></i>
                   </a>
-                  <button type="submit" class="btn btn-xs"><i class="ti ti-trash-x text-danger fw-normal"></i></button>
+                  <button type="submit" class="btn btn-xs px-1"><i class="ti ti-trash-x text-danger fw-normal"></i></button>
                </form>';
             })
             ->rawColumns(['action'])

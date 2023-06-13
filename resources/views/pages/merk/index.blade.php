@@ -49,7 +49,7 @@
                     width: '5%',
                     orderable: false,
                     searchable: false,
-                    class: 'text-center'
+                    class: 'text-center p-1'
                 }
             ];
             var table = $('.datatable').DataTable(options);
