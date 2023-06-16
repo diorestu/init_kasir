@@ -17,7 +17,7 @@ class KategoriController extends Controller
          return DataTables::of($data)
             ->addIndexColumn()
             ->addColumn('action', function ($row) {
-               return '<form action="' . route('master.barang.destroy', $row->id) . '" class="d-flex justify-content-center align-items-center" method="post">
+               return '<form action="' . route("master.barang.destroy", $row->id) . '" class="d-flex justify-content-center align-items-center" method="post">
                ' . csrf_field() . '
                ' . method_field("DELETE") . '
                   <a href="' . route('master.barang.edit', $row->id) . '" class="btn btn-xs px-1">

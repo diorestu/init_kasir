@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Barang extends Model
 {
-   use HasFactory, SoftDeletes;
+   // use HasFactory, SoftDeletes;
 
    protected $table = 'barang';
 

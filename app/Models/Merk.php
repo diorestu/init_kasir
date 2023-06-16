@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Merk extends Model
 {
-   use SoftDeletes;
+   // use SoftDeletes;
 
    protected $table = 'merek_barang';
 
